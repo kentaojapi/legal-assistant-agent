@@ -1,0 +1,31 @@
+[project]
+name = "legal_assistant_agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "click>=8.1.7",
+    "langchain-core>=0.3.21",
+    "langchain-openai>=0.2.10",
+    "langgraph>=0.2.53",
+    "python-dotenv>=1.0.1",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ['B', 'SIM', 'I']
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint.isort]
+force-wrap-aliases = true
+combine-as-imports = true
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.8.4",
+]
