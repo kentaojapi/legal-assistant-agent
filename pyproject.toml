@@ -30,6 +30,8 @@ combine-as-imports = true
 
 [tool.uv]
 dev-dependencies = [
+    "jupyter>=1.1.1",
     "markitdown>=0.0.1a3",
+    "pygraphviz>=1.14",
     "ruff>=0.8.4",
 ]
