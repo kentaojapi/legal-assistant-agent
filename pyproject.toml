@@ -11,6 +11,8 @@ dependencies = [
     "langchain-openai>=0.2.10",
     "langgraph>=0.2.53",
     "python-dotenv>=1.0.1",
+    "sudachidict-core>=20241021",
+    "sudachipy>=0.6.9",
 ]
 
 [tool.ruff]
@@ -28,5 +30,6 @@ combine-as-imports = true
 
 [tool.uv]
 dev-dependencies = [
+    "markitdown>=0.0.1a3",
     "ruff>=0.8.4",
 ]
