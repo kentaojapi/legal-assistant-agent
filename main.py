@@ -127,7 +127,7 @@ class ContractAgent:
         search_result = self.document_searcher.search(search_keyword.text)
         result = self.contract_qa_assistant.run(
             question=state.question,
-            contract_title=search_result.file_name,
+            contract_file_name=search_result.file_name,
             contract_full_text=search_result.full_text
         )
         return {"answer": result.text}
