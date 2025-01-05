@@ -3,7 +3,6 @@ from enum import Enum
 import click
 from dotenv import load_dotenv
 from langchain.output_parsers.enum import EnumOutputParser
-from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langgraph.graph import END, StateGraph
@@ -124,7 +123,7 @@ class ContractAgent:
 
     def _search_contracts(self, state: ContractAgentState) -> dict[str, str]:
         search_keyword = self.search_keyword_creator.run(state.question)
-        search_result = self.document_searcher.search(search_keyword.text)
+        search_result = self.document_searcher.search(search_keyword.text)[0]
         result = self.contract_qa_assistant.run(
             question=state.question,
             contract_file_name=search_result.file_name,

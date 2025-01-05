@@ -93,7 +93,8 @@ class DocumentSearcher:
                     file_name=document.file_name,
                     score=1.0,
                     matched_text=query,
-                    context=context
+                    context=context,
+                    full_text=document.full_text
                 ))
                 continue
 
@@ -118,7 +119,7 @@ class DocumentSearcher:
                         full_text=document.full_text
                     ))
         # スコアで降順ソート
-        return sorted(results, key=lambda x: x.score, reverse=True)[0]
+        return sorted(results, key=lambda x: x.score, reverse=True)
 
 def main():
     # 使用例
