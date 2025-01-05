@@ -9,8 +9,6 @@ from langgraph.prebuilt import create_react_agent
 from tools.legal_qa_assistant import QAAssistant
 from tools.search_contract_files import DocumentSearcher, SearchResult
 
-MODEL = ChatOpenAI(model="gpt-4o")
-
 
 @tool
 def search_contract_files(
@@ -26,6 +24,25 @@ def legal_qa_assistant(
     return QAAssistant().run(question)
 
 
+class ReactAgent:
+    def __init__(self) -> None:
+        self.model = ChatOpenAI(model="gpt-4o")
+        self.tools = [
+            TavilySearchResults(max_results=2),
+            search_contract_files,
+            legal_qa_assistant
+        ]
+
+    @property
+    def agent(self):
+        return create_react_agent(self.model, self.tools)
+
+    def invoke(self, question: str) -> dict:
+        return self.agent.invoke(
+            {"messages": [("human", question)]}
+        )
+
+
 @click.command()
 @click.option(
     '--question',
@@ -34,15 +51,8 @@ def legal_qa_assistant(
     help='Question to AI agent.'
 )
 def main(question: str) -> None:
-    tools = [
-        TavilySearchResults(max_results=2),
-        search_contract_files,
-        legal_qa_assistant
-    ]
-    agent = create_react_agent(MODEL, tools)
-    result = agent.invoke(
-        {"messages": [("human", question)]}
-    )
+    agent = ReactAgent()
+    result = agent.invoke(question)
     print(result["messages"][-1].content)
 
 
