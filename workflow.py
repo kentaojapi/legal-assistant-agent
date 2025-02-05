@@ -114,14 +114,17 @@ class ContractAgent:
                 raise ValueError(f"Invalid tool: {state.selected_tool}")
 
     def _qa_assistant(self, state: ContractAgentState) -> dict[str, str]:
+        print(f"Running QA assistant with question: {state.question}")
         result = self.qa_assistant.run(state.question)
         return {"answer": result.text}
 
     def _web_search(self, state: ContractAgentState) -> dict[str, str]:
+        print(f"Running web search with question: {state.question}")
         result = self.web_search.run(state.question)
         return {"answer": result}
 
     def _search_contracts(self, state: ContractAgentState) -> dict[str, str]:
+        print(f"Searching contract files with question: {state.question}")
         search_keyword = self.search_keyword_creator.run(state.question)
         search_result = self.document_searcher.search(search_keyword.text)[0]
         result = self.contract_qa_assistant.run(
@@ -133,6 +136,7 @@ class ContractAgent:
 
     def _select_tool(self, state: ContractAgentState) -> dict:
         result = self.selector.run(state.question)
+        print(f"Selected tool: {result}")
         return {"selected_tool": result}
 
     def run(self, question: str) -> str:
@@ -151,6 +155,8 @@ class ContractAgent:
 def main(question: str) -> None:
     agent = ContractAgent()
     final_output = agent.run(question=question)
+    print("")
+    print("Final output:")
     print(final_output)
 
 

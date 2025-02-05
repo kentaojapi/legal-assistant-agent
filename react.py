@@ -35,7 +35,7 @@ class ReactAgent:
 
     @property
     def agent(self):
-        return create_react_agent(self.model, self.tools)
+        return create_react_agent(self.model, self.tools, debug=True)
 
     def invoke(self, question: str) -> dict:
         return self.agent.invoke(
@@ -53,6 +53,8 @@ class ReactAgent:
 def main(question: str) -> None:
     agent = ReactAgent()
     result = agent.invoke(question)
+    print("")
+    print("Final output:")
     print(result["messages"][-1].content)
 
 

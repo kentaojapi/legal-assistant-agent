@@ -3,3 +3,19 @@ python = "3.12.6"
 
 [env]
 _.file = '.env'
+
+[tasks.workflow1]
+description = "workflow: 「Q: 業務委託契約書を探して要約して」"
+run = "python workflow.py --question '業務委託契約書を探して要約して'"
+
+[tasks.react1]
+description = "react: 「Q: 業務委託契約書を探して要約して」"
+run = "python react.py --question '業務委託契約書を探して要約して'"
+
+[tasks.workflow2]
+description = "workflow: 「Q: 業務委託に関しての注意点をWebで検索した上で、業務委託契約書を探して内容を評価して」"
+run = "python workflow.py --question '業務委託に関しての注意点をWebで検索した上で、業務委託契約書を探して内容を評価して'"
+
+[tasks.react2]
+description = "react: 「Q: 業務委託に関しての注意点をWebで検索した上で、業務委託契約書を探して内容を評価して」"
+run = "python react.py --question '業務委託に関しての注意点をWebで検索した上で、業務委託契約書を探して内容を評価して'"
